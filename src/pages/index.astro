@@ -1,11 +1,116 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import { education, experience, profile } from '../data/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="T. Hareshjaa Pillay | Home">
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/" aria-current="page">Home</a>
+				<a href="/projects">Projects</a>
+				<a href="/experience">Experience</a>
+				<a href="/education">Education</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main scroll-flow">
+			<section class="panel step-section reveal stagger-1">
+				<p class="eyebrow">Step 1 / About me</p>
+				<h1>{profile.name}</h1>
+				<p class="lead">Highly motivated Bachelor of Science in Artificial Intelligence applicant with strong initiative, leadership experience, and a clear mission to build useful AI products that improve daily life.</p>
+				<div class="stack-copy">
+					{profile.bio.map((line) => <p class="chips">{line}</p>)}
+					<p class="chips"><strong>Why AI:</strong> {profile.aiMotivation}</p>
+				</div>
+				<div class="meta-list">
+					<span class="meta-chip">Problem Solver</span>
+					<span class="meta-chip">Fast Learner</span>
+					<span class="meta-chip">Team Player</span>
+					<span class="meta-chip">Delivery Focused</span>
+				</div>
+				<div class="meta-list">
+					<span class="meta-chip">{profile.location}</span>
+					<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+					<a class="meta-chip" href={`mailto:${profile.email}`}>Email</a>
+				</div>
+			</section>
+
+			<section class="panel step-section reveal">
+				<p class="eyebrow">Step 2 / Personal journey</p>
+				<h2>How I Chose Artificial Intelligence</h2>
+				<div class="stack-copy">
+					{profile.careerJourney.map((line) => <p class="chips">{line}</p>)}
+				</div>
+			</section>
+
+			<section class="panel step-section reveal">
+				<p class="eyebrow">Step 3 / Education</p>
+				<h2>{education.aLevels.school}</h2>
+				<p class="chips">A Levels in Mathematics, Chemistry, and Physics.</p>
+				<p class="chips">Detailed grades are available on the Education page.</p>
+				<p class="chips">IELTS: {education.ielts}</p>
+				<a href="/education">View full education details</a>
+			</section>
+
+			<section class="panel step-section reveal">
+				<p class="eyebrow">Step 4 / Extracurricular leadership</p>
+				<h2>Leadership and Service</h2>
+				<ul class="timeline compact-list">
+					{profile.extracurriculars.map((item) => <li><strong>{item.title}</strong> - {item.duration}<br />{item.description}</li>)}
+				</ul>
+			</section>
+
+			<section class="panel step-section reveal">
+				<p class="eyebrow">Step 5 / Experience</p>
+				<h2>{experience.department}</h2>
+				<p class="chips">{experience.companyType} · {experience.duration}</p>
+				<ul class="timeline compact-list">
+					{experience.workPerformed.map((task) => <li>{task}</li>)}
+				</ul>
+				<a href="/experience">View full experience details</a>
+			</section>
+
+			{
+				projectFlow.map((project, index) => (
+					<section class="panel step-section reveal" style={`--reveal-delay: ${index * 70}ms`}>
+						<p class="eyebrow">Step {index + 6} / Project {index + 1}</p>
+						<h2>{project.data.title}</h2>
+						<p class="lead">{project.data.summary}</p>
+						<p class="chips"><strong>Problem:</strong> {project.data.problem}</p>
+						<p class="chips"><strong>Solution:</strong> {project.data.solution}</p>
+						<p class="chips">{project.data.technologies.join(' · ')}</p>
+						<a href={`/projects/${project.slug}`}>Open project details</a>
+					</section>
+				))
+			}
+
+			<section class="panel step-section reveal">
+				<p class="eyebrow">Final step / Contact</p>
+				<h2>Let's build something useful</h2>
+				<div class="meta-list">
+					<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
+					<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+				</div>
+				<a href="/contact">Open contact page</a>
+			</section>
+
+			<section class="panel step-section reveal footer-contact">
+				<p class="eyebrow">Contact card</p>
+				<h2>{profile.name}</h2>
+				<div class="meta-list">
+					<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
+					<span class="meta-chip">{profile.phone ?? 'Phone number: please provide to publish'}</span>
+				</div>
+			</section>
+		</main>
+	</div>
 </Layout>

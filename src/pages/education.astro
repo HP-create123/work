@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { education } from '../data/site';
+---
+
+<Layout title="Education | T. Hareshjaa Pillay">
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/projects">Projects</a>
+				<a href="/experience">Experience</a>
+				<a href="/education" aria-current="page">Education</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main">
+			<section class="panel reveal stagger-1">
+				<p class="eyebrow">Academic profile</p>
+				<h1>Education</h1>
+				<p class="lead">Core science and math track with strong language proficiency.</p>
+			</section>
+
+			<section class="panel-grid cols-2 reveal stagger-2">
+				<article class="card">
+					<h2>A Levels</h2>
+					<p class="chips">{education.aLevels.school}</p>
+					<ul class="plain-list">
+						{education.aLevels.subjects.map((subject) => <li>{subject.name}: {subject.grade}</li>)}
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>IGCSE</h2>
+					<ul class="plain-list">
+						{education.igcse.map((subject) => <li>{subject.name}: {subject.grade}</li>)}
+					</ul>
+				</article>
+			</section>
+
+			<section class="card reveal stagger-3">
+				<h2>English Proficiency</h2>
+				<p class="chips">IELTS: {education.ielts}</p>
+			</section>
+		</main>
+	</div>
+</Layout>

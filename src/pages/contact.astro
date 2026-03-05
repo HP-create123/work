@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/site';
+---
+
+<Layout title="Contact | T. Hareshjaa Pillay">
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/projects">Projects</a>
+				<a href="/experience">Experience</a>
+				<a href="/education">Education</a>
+				<a href="/contact" aria-current="page">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main">
+			<section class="panel reveal stagger-1">
+				<p class="eyebrow">Direct channels</p>
+				<h1>Contact</h1>
+				<p class="lead">Open to AI, automation, and data-focused collaboration opportunities.</p>
+			</section>
+
+			<section class="story-layout reveal stagger-2">
+				<article class="card">
+					<h2>Reach Out</h2>
+					<div class="contact-grid">
+						<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
+						<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub Profile</a>
+						<span class="meta-chip">{profile.location}</span>
+					</div>
+				</article>
+
+				<article class="card">
+					<h2>Interest Areas</h2>
+					<ul class="plain-list">
+						{profile.interests.map((interest) => <li>{interest}</li>)}
+					</ul>
+				</article>
+			</section>
+		</main>
+	</div>
+</Layout>

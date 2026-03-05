@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} | Projects`} description={project.data.summary}>
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/projects" aria-current="page">Projects</a>
+				<a href="/experience">Experience</a>
+				<a href="/education">Education</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main project-detail">
+			<section class="panel reveal stagger-1">
+				<a href="/projects" class="back-link">&lt; Back to projects</a>
+				<p class="eyebrow">Project brief</p>
+				<h1>{project.data.title}</h1>
+				<p class="lead">{project.data.summary}</p>
+				<div class="meta-list">
+					{project.data.technologies.map((tech) => <span class="meta-chip">{tech}</span>)}
+				</div>
+			</section>
+
+			<section class="panel-grid cols-2 reveal stagger-2">
+				<article class="card">
+					<h2>Problem</h2>
+					<p class="chips">{project.data.problem}</p>
+				</article>
+				<article class="card">
+					<h2>Solution</h2>
+					<p class="chips">{project.data.solution}</p>
+				</article>
+				<article class="card">
+					<h2>Contributions</h2>
+					<p class="chips">{project.data.contributions}</p>
+				</article>
+				<article class="card">
+					<h2>Impact</h2>
+					<p class="chips">{project.data.impact}</p>
+				</article>
+			</section>
+
+			<section class="card reveal stagger-3">
+				<h2>Learning and Next Iteration</h2>
+				<p class="chips">{project.data.learned}</p>
+				{project.data.nextImprovements && <p class="chips"><strong>Next improvements:</strong> {project.data.nextImprovements}</p>}
+			</section>
+
+			<section class="card prose-block reveal stagger-4">
+				<Content />
+			</section>
+		</main>
+	</div>
+</Layout>

@@ -1,46 +1,80 @@
-# Astro Starter Kit: Basics
+# T. Hareshjaa Pillay Portfolio
 
-```sh
-npm create astro@latest -- --template basics
+Personal portfolio website built with Astro and TailwindCSS to showcase AI and automation projects, internship experience, and academic background.
+
+## Stack
+
+- Astro
+- TailwindCSS
+- Markdown content collections for project pages
+- GitHub Pages deployment
+
+## Local Development
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Open `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Build
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+npm run build
+npm run preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content Management
 
-## 🧞 Commands
+### Add or update project pages
 
-All commands are run from the root of the project, from a terminal:
+Projects are stored as Markdown files in:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+`src/content/projects/`
 
-## 👀 Want to learn more?
+Each project file includes frontmatter fields like:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `title`
+- `summary`
+- `problem`
+- `solution`
+- `contributions`
+- `technologies`
+- `impact`
+- `learned`
+- `nextImprovements` (optional)
+- `featured` (true/false)
+- `order` (number)
+
+To add a new project, create a new `.md` file in `src/content/projects/` and follow the same structure.
+
+### Personal details
+
+Profile, experience, education, interests, and skills are centralized in:
+
+`src/data/site.ts`
+
+## Pages
+
+- `/` Home
+- `/projects` Projects list
+- `/projects/[slug]` Project detail pages
+- `/experience` Internship and work experience
+- `/education` Academic background
+- `/contact` Contact links
+
+## GitHub Pages Deployment
+
+This project includes a workflow at:
+
+`.github/workflows/deploy.yml`
+
+To deploy:
+
+1. Push this project to a GitHub repository.
+2. In GitHub, go to **Settings > Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Push to `main` to trigger deployment.
+
+The Astro config automatically sets the correct base path for GitHub Actions builds.

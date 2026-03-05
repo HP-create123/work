@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Projects | T. Hareshjaa Pillay">
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/projects" aria-current="page">Projects</a>
+				<a href="/experience">Experience</a>
+				<a href="/education">Education</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main">
+			<section class="panel reveal stagger-1">
+				<p class="eyebrow">Build archive</p>
+				<h1>Project Cases</h1>
+				<p class="lead">A structured view of shipped dashboards, internal platforms, and AI-powered tools.</p>
+			</section>
+
+			<section class="panel-grid cols-2 reveal stagger-2">
+				{
+					projects.map((project, index) => (
+						<article class="card project-card reveal" style={`--reveal-delay: ${index * 120}ms`}>
+							<p class="eyebrow">Case {project.data.order}</p>
+							<h2>{project.data.title}</h2>
+							<p class="chips">{project.data.summary}</p>
+							<p class="chips">{project.data.technologies.join(' · ')}</p>
+							<a href={`/projects/${project.slug}`}>View full breakdown</a>
+						</article>
+					))
+				}
+			</section>
+		</main>
+	</div>
+</Layout>
