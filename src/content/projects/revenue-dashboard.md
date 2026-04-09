@@ -1,18 +1,20 @@
 ---
 title: Revenue Dashboard
-summary: Dashboard that processes one or multiple Excel files and automatically generates engineered fields.
-problem: Revenue data arrives in different Excel formats, which makes calculations difficult.
-solution: The system standardizes data formats and produces extended columns with working calculations.
+summary: An interactive CSV-based revenue analytics dashboard with explainable KPI views and lightweight forecasting.
+problem: Revenue files arrive with inconsistent headers and month formats, making analysis unreliable and hard to scale.
+solution: Built a browser dashboard that normalizes input data, computes yearly and monthly metrics, and visualizes trend and seasonality-based forecasts with click-to-explain insights.
 contributions: Built the entire project independently.
 technologies:
-  - Python
-  - Streamlit
-  - VS Code
-impact: Makes revenue analysis easier and faster.
-learned: Learned how to build practical dashboards with Streamlit and improve coding speed in VS Code.
-nextImprovements: Add forecasting capabilities.
+  - JavaScript
+  - Chart.js
+  - PapaParse
+  - HTML/CSS
+impact: Improved decision speed by turning raw CSV uploads into clear KPIs, charts, and transparent forecast outputs.
+learned: Improved front-end data engineering, chart explainability design, and practical implementation of trend-based forecasting logic.
+nextImprovements: Add saved analysis sessions and scenario comparison presets for planning teams.
 featured: true
 order: 1
+github: "https://github.com/HP-create123/revenue-dashboard"
 ---
 
-This dashboard turns inconsistent spreadsheet inputs into a clean, analysis-ready format for faster decision-making.
+The dashboard balances speed and trust by combining fast analysis with clear explanations of how each metric and prediction is generated.

@@ -21,7 +21,7 @@ const { Content } = await render(project);
 			<nav>
 				<a href="/">Home</a>
 				<a href="/projects" aria-current="page">Projects</a>
-				<a href="/experience">Experience</a>
+				<a href="/work-experience">Work Experience</a>
 				<a href="/education">Education</a>
 				<a href="/contact">Contact</a>
 			</nav>
@@ -33,8 +33,15 @@ const { Content } = await render(project);
 				<p class="eyebrow">Project brief</p>
 				<h1>{project.data.title}</h1>
 				<p class="lead">{project.data.summary}</p>
+				{project.data.github && (
+					<p class="chips" style="margin-top: 1rem;">
+						<a href={project.data.github} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">
+							View on GitHub ↗
+						</a>
+					</p>
+				)}
 				<div class="meta-list">
-					{project.data.technologies.map((tech) => <span class="meta-chip">{tech}</span>)}
+					{project.data.technologies.map((tech: string) => <span class="meta-chip">{tech}</span>)}
 				</div>
 			</section>
 

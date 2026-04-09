@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 			<nav>
 				<a href="/">Home</a>
 				<a href="/projects" aria-current="page">Projects</a>
-				<a href="/experience">Experience</a>
+				<a href="/work-experience">Work Experience</a>
 				<a href="/education">Education</a>
 				<a href="/contact">Contact</a>
 			</nav>
@@ -31,12 +31,15 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 			<section class="panel-grid cols-2 reveal stagger-2">
 				{
 					projects.map((project, index) => (
-						<article class="card project-card reveal" style={`--reveal-delay: ${index * 120}ms`}>
+						<article id={project.slug} class="card project-card reveal" style={`--reveal-delay: ${index * 120}ms`}>
 							<p class="eyebrow">Case {project.data.order}</p>
 							<h2>{project.data.title}</h2>
 							<p class="chips">{project.data.summary}</p>
+							<p class="chips"><strong>Problem:</strong> {project.data.problem}</p>
+							<p class="chips"><strong>Solution:</strong> {project.data.solution}</p>
+							<p class="chips"><strong>Impact:</strong> {project.data.impact}</p>
+							<p class="chips"><strong>Your role:</strong> {project.data.contributions}</p>
 							<p class="chips">{project.data.technologies.join(' · ')}</p>
-							<a href={`/projects/${project.slug}`}>View full breakdown</a>
 						</article>
 					))
 				}

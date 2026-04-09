@@ -13,7 +13,7 @@ import { profile } from '../data/site';
 			<nav>
 				<a href="/">Home</a>
 				<a href="/projects">Projects</a>
-				<a href="/experience">Experience</a>
+				<a href="/work-experience">Work Experience</a>
 				<a href="/education">Education</a>
 				<a href="/contact" aria-current="page">Contact</a>
 			</nav>
@@ -30,9 +30,11 @@ import { profile } from '../data/site';
 				<article class="card">
 					<h2>Reach Out</h2>
 					<div class="contact-grid">
-						<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
+						<a class="meta-chip" href={`mailto:${profile.workEmail}`}>Work: {profile.workEmail}</a>
+						<a class="meta-chip" href={`mailto:${profile.personalEmail}`}>Personal: {profile.personalEmail}</a>
 						<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub Profile</a>
 						<span class="meta-chip">{profile.location}</span>
+						<span class="meta-chip">Phone: {profile.phone}</span>
 					</div>
 				</article>
 

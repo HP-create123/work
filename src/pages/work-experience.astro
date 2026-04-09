@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { experience, workExperience } from '../data/site';
+---
+
+<Layout title="Work Experience | T. Hareshjaa Pillay">
+	<div class="page-shell">
+		<header class="site-header reveal">
+			<a href="/" class="brand">
+				T. Hareshjaa Pillay
+				<small>AI Portfolio Interface</small>
+			</a>
+			<nav>
+				<a href="/">Home</a>
+				<a href="/projects">Projects</a>
+				<a href="/work-experience" aria-current="page">Work Experience</a>
+				<a href="/education">Education</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</header>
+
+		<main class="page-main">
+			<section class="panel reveal stagger-1">
+				<p class="eyebrow">Professional journey</p>
+				<h1>Work Experience</h1>
+				<p class="lead">Early responsibility in retail and current internship experience in digital development and AI workflows.</p>
+			</section>
+
+			<section class="panel reveal stagger-2">
+				<h2>Experience Timeline</h2>
+				<ul class="timeline">
+					{
+						workExperience.map((item) => (
+							<li>
+								<strong>{item.role}</strong> - {item.organization} ({item.period})
+								<br />
+								{item.description}
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="story-layout reveal stagger-3">
+				<article class="card">
+					<h2>Current Internship Scope</h2>
+					<p class="chips">{experience.department} within {experience.companyType}</p>
+					<p class="chips">{experience.duration}</p>
+					<ul class="timeline compact-list">
+						{experience.workPerformed.map((task) => <li>{task}</li>)}
+					</ul>
+				</article>
+
+				<article class="card">
+					<h2>Tools Used</h2>
+					<ul class="plain-list">
+						{experience.toolsUsed.map((tool) => <li>{tool}</li>)}
+					</ul>
+				</article>
+			</section>
+		</main>
+	</div>
+</Layout>

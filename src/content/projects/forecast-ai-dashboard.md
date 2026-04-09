@@ -1,17 +1,19 @@
 ---
 title: Forecast AI Dashboard
-summary: AI chatbot-style dashboard for revenue analysis and forecasting.
-problem: Manual forecasting and revenue analysis are time-consuming.
-solution: The dashboard creates engineered fields, forecasts revenue trends, and presents charts through a chatbot-style interface.
-contributions: Designed and built the entire project.
+summary: A natural-language forecasting dashboard that turns uploaded revenue data into explainable forecasts, comparisons, and model evaluations.
+problem: Traditional forecasting workflows were manual, slow, and difficult for non-technical users to iterate on quickly.
+solution: Built a Streamlit workspace that supports prompt-based analysis, multi-dataset activation, model reuse, and MAE/MAPE evaluation for practical planning.
+contributions: Designed and developed the full product workflow, from user interaction patterns to model handling and analytics output behavior.
 technologies:
-  - AI tools
   - Streamlit
-  - OpenCode
-impact: Helps teams understand future revenue goals.
-learned: Learned how to train AI models and integrate them into end-user applications.
+  - Python
+  - Time-series forecasting
+  - Model evaluation
+impact: Enabled faster forecasting cycles and improved confidence in planning decisions with clearer, reusable analytics outputs.
+learned: Deepened expertise in building explainable AI experiences and translating forecasting logic into accessible product workflows.
 featured: true
 order: 2
+github: "https://github.com/HP-create123/forecast-ai-dashboard"
 ---
 
-This project combines conversational UX and forecasting workflows to make complex revenue analysis easier to explore.
+This project combines conversational analysis and forecasting into a practical decision-support dashboard for business teams.

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { education, experience, profile } from '../data/site';
+import { education, profile, workExperience } from '../data/site';
 
 const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -16,7 +16,7 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 			<nav>
 				<a href="/" aria-current="page">Home</a>
 				<a href="/projects">Projects</a>
-				<a href="/experience">Experience</a>
+				<a href="/work-experience">Work Experience</a>
 				<a href="/education">Education</a>
 				<a href="/contact">Contact</a>
 			</nav>
@@ -40,7 +40,8 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 				<div class="meta-list">
 					<span class="meta-chip">{profile.location}</span>
 					<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
-					<a class="meta-chip" href={`mailto:${profile.email}`}>Email</a>
+					<a class="meta-chip" href={`mailto:${profile.workEmail}`}>Work Email</a>
+					<a class="meta-chip" href={`mailto:${profile.personalEmail}`}>Personal Email</a>
 				</div>
 			</section>
 
@@ -62,8 +63,8 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 			</section>
 
 			<section class="panel step-section reveal">
-				<p class="eyebrow">Step 4 / Extracurricular leadership</p>
-				<h2>Leadership and Service</h2>
+				<p class="eyebrow">Step 4 / Leadership, service, and achievements</p>
+				<h2>Leadership, Service, and Achievements</h2>
 				<ul class="timeline compact-list">
 					{profile.extracurriculars.map((item) => <li><strong>{item.title}</strong> - {item.duration}<br />{item.description}</li>)}
 				</ul>
@@ -71,12 +72,19 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 
 			<section class="panel step-section reveal">
 				<p class="eyebrow">Step 5 / Experience</p>
-				<h2>{experience.department}</h2>
-				<p class="chips">{experience.companyType} · {experience.duration}</p>
+				<h2>Work Experience</h2>
 				<ul class="timeline compact-list">
-					{experience.workPerformed.map((task) => <li>{task}</li>)}
+					{
+						workExperience.map((item) => (
+							<li>
+								<strong>{item.role}</strong> - {item.organization} ({item.period})
+								<br />
+								{item.description}
+							</li>
+						))
+					}
 				</ul>
-				<a href="/experience">View full experience details</a>
+				<a href="/work-experience">View full work experience</a>
 			</section>
 
 			{
@@ -87,8 +95,12 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 						<p class="lead">{project.data.summary}</p>
 						<p class="chips"><strong>Problem:</strong> {project.data.problem}</p>
 						<p class="chips"><strong>Solution:</strong> {project.data.solution}</p>
+						<p class="chips"><strong>Impact:</strong> {project.data.impact}</p>
+						<p class="chips"><strong>Your role:</strong> {project.data.contributions}</p>
 						<p class="chips">{project.data.technologies.join(' · ')}</p>
-						<a href={`/projects/${project.slug}`}>Open project details</a>
+						{project.data.github && (
+							<a href={project.data.github} target="_blank" rel="noreferrer" class="meta-chip border-chip" style="display: inline-block; margin-top: 1rem;">View Repository on GitHub ↗</a>
+						)}
 					</section>
 				))
 			}
@@ -97,20 +109,21 @@ const projectFlow = (await getCollection('projects')).sort((a, b) => a.data.orde
 				<p class="eyebrow">Final step / Contact</p>
 				<h2>Let's build something useful</h2>
 				<div class="meta-list">
-					<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
+					<a class="meta-chip" href={`mailto:${profile.workEmail}`}>Work: {profile.workEmail}</a>
+					<a class="meta-chip" href={`mailto:${profile.personalEmail}`}>Personal: {profile.personalEmail}</a>
 					<a class="meta-chip" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
 				</div>
 				<a href="/contact">Open contact page</a>
 			</section>
-
-			<section class="panel step-section reveal footer-contact">
-				<p class="eyebrow">Contact card</p>
-				<h2>{profile.name}</h2>
-				<div class="meta-list">
-					<a class="meta-chip" href={`mailto:${profile.email}`}>{profile.email}</a>
-					<span class="meta-chip">{profile.phone ?? 'Phone number: please provide to publish'}</span>
-				</div>
-			</section>
 		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">
+				<strong>{profile.name}</strong>
+				<a href={`mailto:${profile.workEmail}`}>Work: {profile.workEmail}</a>
+				<a href={`mailto:${profile.personalEmail}`}>Personal: {profile.personalEmail}</a>
+				<span>{profile.phone}</span>
+			</div>
+		</footer>
 	</div>
 </Layout>

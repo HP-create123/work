@@ -10,6 +10,48 @@ const {
 	title = 'T. Hareshjaa Pillay | Portfolio',
 	description = 'Aspiring AI developer building tools that simplify data analysis and automate real-world workflows.'
 } = Astro.props;
+
+const shapes = [
+	// 1. Robotics / Robot Head
+	`<rect x="62" y="54" width="96" height="84" rx="14" /><circle cx="94" cy="90" r="9" /><circle cx="126" cy="90" r="9" /><path d="M84 116h52M110 54V34" />`,
+	// 2. Technology / Circuit Board
+	`<rect x="24" y="24" width="232" height="132" rx="14" /><path d="M42 52h86M42 84h132M42 116h76M168 52h70M188 116h50" />`,
+	// 3. Technology / Server Rack
+	`<rect x="40" y="40" width="180" height="40" rx="8" /><rect x="40" y="110" width="180" height="40" rx="8" /><rect x="40" y="180" width="180" height="40" rx="8" /><circle cx="190" cy="60" r="6" /><circle cx="190" cy="130" r="6" /><circle cx="190" cy="200" r="6" />`,
+	// 4. Technology / Drone
+	`<circle cx="60" cy="60" r="30" /><circle cx="200" cy="60" r="30" /><circle cx="60" cy="200" r="30" /><circle cx="200" cy="200" r="30" /><rect x="90" y="90" width="80" height="80" rx="10" /><path d="M80 80l-20-20M180 80l20-20M80 180l-20 20M180 180l20 20" />`,
+	// 5. Island / Mountains
+	`<ellipse cx="130" cy="180" rx="100" ry="30" /><path d="M60 180l40-80 30 30 50-60 40 110" />`,
+	// 6. Island / Palm Tree
+	`<path d="M130 220V120M130 130c-40-20-60-50-60-80M130 130c40-20 60-50 60-80M130 150c-40 0-70-10-80-30M130 150c40 0 70-10 80-30" />`,
+	// 7. Education / Atom Science
+	`<ellipse cx="130" cy="130" rx="90" ry="30" transform="rotate(30 130 130)" /><ellipse cx="130" cy="130" rx="90" ry="30" transform="rotate(150 130 130)" /><circle cx="130" cy="130" r="16" />`,
+	// 8. Education / Graduation Cap
+	`<path d="M30 100l100-40 100 40-100 40z" /><path d="M70 116v40c0 20 60 30 60 30s60-10 60-30v-40" /><path d="M220 100v60" />`,
+	// 9. Education / Open Book
+	`<path d="M130 60v120c-30-10-60-10-90 0V60c30-10 60-10 90 0z" /><path d="M130 60v120c30-10 60-10 90 0V60c-30-10-60-10-90 0z" /><path d="M60 90h50M60 120h50M150 90h50M150 120h50" />`
+];
+
+const rows = 4;
+const cols = 5; // 20 giant scattered shapes
+const bgElements = [];
+let idx = 0;
+for (let r = 0; r < rows; r++) {
+	for (let c = 0; c < cols; c++) {
+		const shape = shapes[idx % shapes.length];
+		// Mathematically isolate each shape to its own sector of the screen to explicitly prevent overlap
+		const top = (r / rows) * 100 + (Math.random() * 8); 
+		const left = (c / cols) * 100 + (Math.random() * 8); 
+		
+		const size = Math.floor(Math.random() * 80) + 160; // 160 to 240px
+		const rot = Math.floor(Math.random() * 360);
+		const delay = (Math.random() * 6).toFixed(2);
+		const opac = (Math.random() * 0.3 + 0.35).toFixed(2); // Light theme needs stronger opaque bounding mapping
+		
+		bgElements.push({ shape, top, left, size, rot, delay, opac });
+		idx++;
+	}
+}
 ---
 
 <!doctype html>
@@ -31,57 +73,15 @@ const {
 	</head>
 	<body>
 		<div class="tech-atmosphere" aria-hidden="true">
-			<svg class="bg-icon robot" viewBox="0 0 220 220" fill="none">
-				<circle cx="110" cy="110" r="86" class="outline-ring" />
-				<path d="M36 110h24M160 110h24M110 26v20M110 174v20" class="outline-detail" />
-				<rect x="62" y="54" width="96" height="84" rx="14" />
-				<circle cx="94" cy="90" r="9" />
-				<circle cx="126" cy="90" r="9" />
-				<path d="M84 116h52" />
-				<path d="M110 54V34" />
-				<circle cx="110" cy="28" r="6" />
-				<rect x="74" y="144" width="20" height="40" rx="8" />
-				<rect x="126" y="144" width="20" height="40" rx="8" />
-			</svg>
-			<svg class="bg-icon computer" viewBox="0 0 260 220" fill="none">
-				<rect x="20" y="20" width="220" height="160" rx="16" class="outline-ring" />
-				<path d="M20 108h220M130 20v160" class="outline-detail" />
-				<rect x="34" y="34" width="192" height="118" rx="12" />
-				<path d="M56 62h148" />
-				<path d="M112 152h36v24h-36z" />
-				<path d="M86 188h88" />
-				<circle cx="74" cy="49" r="4" />
-				<circle cx="90" cy="49" r="4" />
-				<circle cx="106" cy="49" r="4" />
-			</svg>
-			<svg class="bg-icon shell" viewBox="0 0 220 220" fill="none">
-				<circle cx="110" cy="110" r="90" class="outline-ring" />
-				<path d="M20 146c24-14 46-14 68 0M132 146c24-14 46-14 68 0" class="outline-detail" />
-				<path d="M110 180c46 0 70-34 70-66 0-39-30-70-70-70s-70 31-70 70c0 32 24 66 70 66Z" />
-				<path d="M110 58v106" />
-				<path d="M82 66c16 18 24 40 24 98" />
-				<path d="M138 66c-16 18-24 40-24 98" />
-				<path d="M62 88c20 18 36 36 42 76" />
-				<path d="M158 88c-20 18-36 36-42 76" />
-			</svg>
-			<svg class="bg-icon coral" viewBox="0 0 240 240" fill="none">
-				<rect x="22" y="24" width="196" height="192" rx="20" class="outline-ring" />
-				<path d="M22 72h196M22 120h196M22 168h196" class="outline-detail" />
-				<path d="M120 198V112" />
-				<path d="M120 146c-26-8-40-28-40-54" />
-				<path d="M120 160c30-8 50-30 50-62" />
-				<path d="M120 124c18-12 26-28 24-48" />
-				<path d="M120 170c-20-8-32-24-34-44" />
-				<path d="M120 186c24-6 42-20 52-40" />
-				<path d="M84 74c0-12 8-20 18-20" />
-				<path d="M170 90c0-10-8-18-18-18" />
-				<path d="M70 154c0-10 8-18 18-18" />
-			</svg>
-			<svg class="bg-icon wave" viewBox="0 0 360 180" fill="none">
-				<path d="M0 112c32-24 64-24 96 0s64 24 96 0 64-24 96 0 64 24 72 18" />
-				<path d="M0 82c32-24 64-24 96 0s64 24 96 0 64-24 96 0 64 24 72 18" />
-				<path d="M0 142c32-24 64-24 96 0s64 24 96 0 64-24 96 0 64 24 72 18" />
-			</svg>
+			{bgElements.map((el) => (
+				<svg 
+					class="bg-icon" 
+					style={`top: ${el.top}%; left: ${el.left}%; width: ${el.size}px; --base-rotation: ${el.rot}deg; animation-delay: ${el.delay}s; opacity: ${el.opac}; position: absolute; stroke: #167fd8; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;`} 
+					viewBox="0 0 260 260" 
+					fill="none" 
+					set:html={el.shape} 
+				/>
+			))}
 		</div>
 		<slot />
 		<script is:inline>

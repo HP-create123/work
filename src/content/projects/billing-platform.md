@@ -1,16 +1,19 @@
 ---
 title: Billing Platform
-summary: Platform that automatically generates billing scripts and manages finance approvals.
-problem: Manual script preparation and approval delays previously took several days.
-solution: The platform automates script generation, routes approvals, and triggers billing notifications.
-contributions: Tested the system, designed the platform, and wrote user guides.
+summary: A workflow-governed billing operations platform that enforces finance approvals before live billing actions.
+problem: Manual script creation, weak approval gates, and limited run visibility increased delays and operational risk in billing cycles.
+solution: Delivered a React + FastAPI + PostgreSQL platform with approval gates, run tracking, audit logs, and notification flow controls across test, live, and post-live stages.
+contributions: Contributed to testing, platform design, UX flow refinement, and documentation for billing and finance users.
 technologies:
+  - React
+  - FastAPI
+  - PostgreSQL
   - Automation workflows
-  - Internal tools
-impact: Saves significant time and improves billing workflow efficiency.
-learned: Learned to align technical automation with finance process requirements.
+impact: Reduced process friction, improved compliance, and gave teams end-to-end visibility from cycle setup to billing closure.
+learned: Deepened understanding of finance-governed workflows, approval state management, and audit-ready platform design.
 featured: true
 order: 4
+github: "https://github.com/HP-create123/billing-platform"
 ---
 
-The system removes manual bottlenecks in billing operations and speeds up approval turnaround.
+The platform transforms script-based billing into a controlled, transparent, and collaboration-ready operation.
